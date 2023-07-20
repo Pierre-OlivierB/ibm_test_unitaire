@@ -1,20 +1,23 @@
-import mail from "./email";
+import date from "./date";
 
-test("email in good shape", () => {
-  expect(mail("toto@gmail.com")).toBe(true);
+test("date impossible", () => {
+  expect(date("99/99/9999")).toBe(false);
 });
-test("email in good shape", () => {
-  expect(mail("toto@gmail.fr")).toBe(true);
+test("date possible", () => {
+  expect(date("2199-12-31")).toBe(true);
 });
-test("email in good shape", () => {
-  expect(mail("toto@gmail")).toBe(false);
+test("date possible", () => {
+  expect(date("20/12/1000")).toBe(true);
 });
-test("email in good shape", () => {
-  expect(mail("toto@@gmail.com")).toBe(false);
+test("date possible", () => {
+  expect(date("01/01/1970")).toBe(true);
 });
-test("email in good shape", () => {
-  expect(mail("toto@gmail@com")).toBe(false);
+test("date possible", () => {
+  expect(date("30/02/1930")).toBe(true);
 });
-test("email in good shape", () => {
-  expect(mail("toto.com@gmail.com")).toBe(true);
+test("date impossible", () => {
+  expect(date("30/1930/02")).toBe(false);
+});
+test("n'est pas une date", () => {
+  expect(date("a")).toBe(false);
 });
